@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # local
     'reservations_app.apps.ReservationsAppConfig',
+    'users_app.apps.UsersAppConfig'
 ]
 
 MIDDLEWARE = [
