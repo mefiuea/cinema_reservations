@@ -8,6 +8,7 @@ django = "==4.0.5"
 psycopg2 = "==2.9.3"
 django-crispy-forms = "==1.14.0"
 crispy-bootstrap5 = "==0.6"
+whitenoise = "==6.2.0"
 
 [dev-packages]
 
