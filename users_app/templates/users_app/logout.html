@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Wyloguj{% endblock %}
+{% block title %}Logout{% endblock %}
 
 {% block content %}
     <div class="container-lg mb-5">
@@ -10,9 +10,9 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     <div class="text-center alert alert-warning" role="alert">
-                        <i>{{ user.username }}</i> czy na pewno chcesz się wylogować?
+                        <i>{{ user.username }}</i> Are you sure you want to sign out?
                     </div>
-                    <button type="submit" class="btn btn-outline-success form-control">Tak, wyloguj!</button>
+                    <button type="submit" class="btn btn-outline-success form-control">Yes, sign out!</button>
                 </form>
             </div>
         </div>
