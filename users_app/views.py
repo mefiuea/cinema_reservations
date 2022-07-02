@@ -15,7 +15,7 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect(reverse_lazy('home_page_app:home_view'))
+                    return redirect(reverse_lazy('reservations_app:repertoire_view'))
     else:
         form = AuthenticationForm()
 
