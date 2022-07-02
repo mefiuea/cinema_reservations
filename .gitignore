@@ -10,6 +10,7 @@ env/.env
 
 *.sqlite3
 #staticfiles/*
+staticfiles
 
 data_base_local_settings.py
 postgres-data
