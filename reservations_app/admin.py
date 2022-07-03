@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import AuthorModel, MovieModel, CinemaHallModel, RepertoireModel, SeatModel, ReservationModel
+from .models import AuthorModel, MovieModel, CinemaHallModel, RepertoireModel, SeatModel, ReservationModel, \
+    MovieGenresModel
 
 
 @admin.register(AuthorModel)
@@ -31,3 +32,8 @@ class SeatAdmin(admin.ModelAdmin):
 @admin.register(ReservationModel)
 class SeatAdmin(admin.ModelAdmin):
     list_display = ('buyer', 'repertoire', 'reservation_number')
+
+
+@admin.register(MovieGenresModel)
+class MovieGenresAdmin(admin.ModelAdmin):
+    list_display = ('genre',)
