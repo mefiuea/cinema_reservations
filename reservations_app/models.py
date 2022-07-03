@@ -11,6 +11,13 @@ class AuthorModel(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
+class MovieGenresModel(models.Model):
+    genre = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.genre
+
+
 class MovieModel(models.Model):
     title = models.CharField(max_length=50, blank=False, unique=True)
     release_date = models.IntegerField(blank=False, null=False, default=2000, validators=[MinValueValidator(1800)])
@@ -19,6 +26,7 @@ class MovieModel(models.Model):
     age_restrictions = models.IntegerField(null=True, blank=True,
                                            validators=[MinValueValidator(0), MaxValueValidator(99)])
     description = models.TextField(blank=True, null=True, validators=[MaxLengthValidator(2000)])
+    genre = models.ManyToManyField('MovieGenresModel', related_name='movie_genre')
 
     def __str__(self):
         return self.title
