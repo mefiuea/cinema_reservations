@@ -5,7 +5,35 @@
 
 {% block content %}
     <div class="container-lg">
-       <p>Test</p>
-        <p>Jeżeli pojawią się minimum 3 wiadomości i 3 wydarzenia zostaną one dodane do strony głównej</p>
+        <header class="d-flex align-items-center justify-content-center">
+            <h1 class="">REPERTOIRE</h1>
+            <span class="p-2">{% if date_selected is Null %}{{ date_selected }}{% else %}
+                {{ date_selected }}{% endif %}</span>
+        </header>
+        <div class="text-center">
+            <form action="" method="GET">
+                <input type="date" name="date"
+                       placeholder='YYYY-MM-DD' value={{ date_selected }}
+                               min="2020-01-01" max="2030-12-31">
+                <button type="submit" class="btn btn-primary">Search!</button>
+                <p>{{ calendar_error }}</p>
+            </form>
+        </div>
+        {% for movie in repertoire %}
+            <div class="card mb-5">
+                <div class="card-horizontal">
+                    <div class="float-start">
+                        <img class="" src="{% static 'images/movie_icon.svg' %}" style="height: 10rem; object-fit: scale-down" alt="Movie icon">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ movie.movie.title }}</h4>
+                        <p class="card-text">{{ movie.movie.description }}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

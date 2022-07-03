@@ -49,7 +49,7 @@ class RepertoireModel(models.Model):
     cinema_hall = models.ForeignKey('CinemaHallModel', on_delete=models.PROTECT)
 
     def __str__(self):
-        return f'Repertoire:{self.id}, {self.movie}, {self.screening_date}, {self.screening_time}'
+        return f'Repertoire: {self.id}, {self.movie}, {self.screening_date}, {self.screening_time}'
 
 
 class SeatModel(models.Model):
