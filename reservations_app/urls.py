@@ -5,6 +5,8 @@ from . import views
 app_name = 'reservations_app'
 
 urlpatterns = [
-    path('', views.repertoire_view, name='home_view'),
+    path('', views.home_view, name='home_view'),
     path('repertoire/', views.repertoire_view, name='repertoire_view'),
+    path('repertoire/get_repertoire_by_selected_sorting/', views.get_repertoire_by_selected_sorting,
+         name='get_repertoire_by_selected_sorting_view'),
 ]

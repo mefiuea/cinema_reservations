@@ -9,8 +9,10 @@
     <title>CR - {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'styles/my_styles.css' %}">
-    <script src="{% static 'scripts/bootstrap.min.js' %}" defer async></script>
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon_cinema.svg' %}"/>
+    <script src="{% static 'scripts/bootstrap.min.js' %}"></script>
+    <script src="{% static 'scripts/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'scripts/sorting_repertoire.js' %}"></script>
 </head>
 <body>
 {% include 'navbar.html' %}

@@ -23,13 +23,34 @@
                     filters and sorting
                 </a>
                 <p>{{ calendar_error }}</p>
-            </form>
-            <div class="collapse mb-3" id="filters">
-                <div class="card card-body">
-                    Some placeholder content for the collapse component. This panel is hidden by default but revealed
-                    when the user activates the relevant trigger.
+
+                <div class="collapse mb-3 container-sm" id="filters">
+                    <div class="card card-body align-items-center">
+                        <span>Sort by:</span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sorting"
+                                   id="sorted_screening_time" value="screening_time" checked>
+                            <label class="form-check-label" for="sorted_screening_time">
+                                Screening time
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sorting"
+                                   id="sorted_alphabetically" value="alphabetically">
+                            <label class="form-check-label" for="sorted_alphabetically">
+                                Alphabetically
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sorting"
+                                   id="sorted_duration" value="duration">
+                            <label class="form-check-label" for="sorted_duration">
+                                Duration
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         {% for repertoire in repertoires %}
             <div class="card mb-5">
@@ -42,11 +63,13 @@
                         <h4 class="card-title">{{ repertoire.movie.title }}</h4>
                         <p class="card-text">Description: {{ repertoire.movie.description }}</p>
                         {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
-                        <p class="card-text">screening time: <span class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
+                        <p class="card-text">screening time: <span
+                                class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">{{ mo }}</small>
+                    <small class="text-muted">Duration: {{ repertoire.movie.duration }}</small>
+                    <small class="text-muted">Price: {{ repertoire.price }} &euro;</small>
                 </div>
             </div>
         {% endfor %}

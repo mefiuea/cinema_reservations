@@ -1,5 +1,7 @@
 import operator
 from datetime import date
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
@@ -29,8 +31,8 @@ def repertoire_view(request):
         # to sort by price
         # repertoire = RepertoireModel.objects.filter(id__in=repertoire).order_by('price')
 
-        for repertoire in repertoires:
-            print('SCREENING TIME: ', repertoire.screening_time, type(repertoire.screening_time), flush=True)
+        # for repertoire in repertoires:
+        #     print('SCREENING TIME: ', repertoire.screening_time, type(repertoire.screening_time), flush=True)
 
         context = {
             'date_selected': date_selected,
@@ -38,3 +40,10 @@ def repertoire_view(request):
             'repertoires': repertoires,
         }
         return render(request, 'reservations_app/repertoire.html', context=context)
+
+
+def get_repertoire_by_selected_sorting(request):
+    selected_sorting = request.GET.get('sorting_by')
+    print('SELECTED SORTING JAVA SCRIPT: ', selected_sorting, flush=True)
+
+    return HttpResponse('ok')
