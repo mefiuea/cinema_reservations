@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        {% for movie in movies_list %}
+        {% for repertoire in repertoires %}
             <div class="card mb-5">
                 <div class="card-horizontal">
                     <div class="float-start">
@@ -39,14 +39,10 @@
                              style="height: 10rem; object-fit: scale-down" alt="Movie icon">
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title">{{ movie.0.movie.title }}</h4>
-                        <p class="card-text">Description: {{ movie.0.movie.description }}</p>
+                        <h4 class="card-title">{{ repertoire.movie.title }}</h4>
+                        <p class="card-text">Description: {{ repertoire.movie.description }}</p>
                         {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
-                        <p class="card-text">screening time:
-                            {% for movie_details in movie %}
-                                ({{ movie_details.screening_time }}, {{ movie_details.id }})
-                            {% endfor %}
-                        </p>
+                        <p class="card-text">screening time: {{ repertoire.screening_time|date:'H:i' }}</p>
                     </div>
                 </div>
                 <div class="card-footer">
