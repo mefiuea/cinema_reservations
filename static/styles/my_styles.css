@@ -1,0 +1,11 @@
+.screening-time {
+    color: white;
+    background: black; /* Changing background color */
+    background: linear-gradient(74deg, rgba(95,126,124,1) 0%, rgba(15,217,204,1) 100%);
+    font-weight: normal; /* Making font bold */
+    border-radius: 20px; /* Making border radius */
+    width: auto; /* Making auto-sizable width */
+    height: auto; /* Making auto-sizable height */
+    padding: 5px 20px 5px 20px; /* Making space around letters */
+    font-size: 18px; /* Changing font size */
+}

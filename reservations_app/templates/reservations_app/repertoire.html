@@ -42,7 +42,7 @@
                         <h4 class="card-title">{{ repertoire.movie.title }}</h4>
                         <p class="card-text">Description: {{ repertoire.movie.description }}</p>
                         {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
-                        <p class="card-text">screening time: {{ repertoire.screening_time|date:'H:i' }}</p>
+                        <p class="card-text">screening time: <span class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
                     </div>
                 </div>
                 <div class="card-footer">
