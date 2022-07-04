@@ -52,26 +52,28 @@
                 </div>
             </form>
         </div>
-        {% for repertoire in repertoires %}
-            <div class="card mb-5">
-                <div class="card-horizontal">
-                    <div class="float-start">
-                        <img class="" src="{% static 'images/movie_icon.svg' %}"
-                             style="height: 10rem; object-fit: scale-down" alt="Movie icon">
+        <div id="repertoires">
+            {% for repertoire in repertoires %}
+                <div class="card mb-5">
+                    <div class="card-horizontal">
+                        <div class="float-start">
+                            <img class="" src="{% static 'images/movie_icon.svg' %}"
+                                 style="height: 10rem; object-fit: scale-down" alt="Movie icon">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ repertoire.movie.title }}</h4>
+                            <p class="card-text">Description: {{ repertoire.movie.description }}</p>
+                            {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
+                            <p class="card-text">screening time: <span
+                                    class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h4 class="card-title">{{ repertoire.movie.title }}</h4>
-                        <p class="card-text">Description: {{ repertoire.movie.description }}</p>
-                        {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
-                        <p class="card-text">screening time: <span
-                                class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
+                    <div class="card-footer">
+                        <small class="text-muted">Duration: {{ repertoire.movie.duration }}</small>
+                        <small class="text-muted">Price: {{ repertoire.price }} &euro;</small>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">Duration: {{ repertoire.movie.duration }}</small>
-                    <small class="text-muted">Price: {{ repertoire.price }} &euro;</small>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
