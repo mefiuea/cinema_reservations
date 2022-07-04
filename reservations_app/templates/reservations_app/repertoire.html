@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}Repertoire{% endblock %}
 
@@ -12,6 +13,7 @@
         </header>
         <div class="text-center">
             <form action="" method="GET">
+                {#                {% csrf_token %}#}
                 <input type="date" name="date"
                        placeholder='YYYY-MM-DD' value={{ date_selected }}
                                min="2020-01-01" max="2030-12-31">
@@ -19,15 +21,22 @@
                 <p>{{ calendar_error }}</p>
             </form>
         </div>
-        {% for movie in repertoire %}
+        {% for movie in movies_list %}
             <div class="card mb-5">
                 <div class="card-horizontal">
                     <div class="float-start">
-                        <img class="" src="{% static 'images/movie_icon.svg' %}" style="height: 10rem; object-fit: scale-down" alt="Movie icon">
+                        <img class="" src="{% static 'images/movie_icon.svg' %}"
+                             style="height: 10rem; object-fit: scale-down" alt="Movie icon">
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title">{{ movie.movie.title }}</h4>
-                        <p class="card-text">{{ movie.movie.description }}</p>
+                        <h4 class="card-title">{{ movie.0.movie.title }}</h4>
+                        <p class="card-text">Description: {{ movie.0.movie.description }}</p>
+                        {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
+                        <p class="card-text">screening time:
+                            {% for m in movie %}
+                                ({{ m.screening_time }}, {{ m.id }})
+                            {% endfor %}
+                        </p>
                     </div>
                 </div>
                 <div class="card-footer">
