@@ -89,3 +89,11 @@ def get_repertoire_by_selected_sorting(request):
     }
 
     return render(request, 'reservations_app/repertoires_list_by_query_string.html', context=context)
+
+
+def booking_view(request, repertoire_id):
+    if request.method == 'POST':
+        pass
+
+    if request.method == 'GET':
+        pass

@@ -4,7 +4,7 @@
     <div class="card mb-5">
         <div class="card-horizontal">
             <div class="float-start">
-                <img class="" src="{% static 'images/movie_icon.svg' %}"
+                <img class="card-img" src="{% static 'images/movie_icon.svg' %}"
                      style="height: 10rem; object-fit: scale-down" alt="Movie icon">
             </div>
             <div class="card-body">
@@ -18,6 +18,12 @@
                         <span class="text-muted">{{ genre }}{% if forloop.last %}{% else %}
                             ,{% endif %}</span>
                     {% endfor %}</p>
+                <div class="">
+                    <form action="" method="GET" class="">
+                        <a href="{% url 'reservations_app:booking_view' repertoire.id %}"
+                           class="btn btn-outline-success form-control">Go to cinema hall</a>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="card-footer">
