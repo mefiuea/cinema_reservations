@@ -9,5 +9,5 @@ urlpatterns = [
     path('repertoire/', views.repertoire_view, name='repertoire_view'),
     path('repertoire/get_repertoire_by_selected_sorting/', views.get_repertoire_by_selected_sorting,
          name='get_repertoire_by_selected_sorting_view'),
-    path('repertoire/booking/<int:repertoire_id>/<int:cinema_hall_id>/', views.booking_view, name='booking_view'),
+    path('repertoire/booking/<int:repertoire_id>/', views.booking_view, name='booking_view'),
 ]

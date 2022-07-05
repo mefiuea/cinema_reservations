@@ -6,8 +6,32 @@
 
 {% block content %}
     <div class="container-lg">
-        <p>Repertoire id: {{ repertoire_id }}</p>
-        <p>Cinema hall id: {{ cinema_hall_id }}</p>
-        <p>{{ repertoire }}</p>
+        <header class="text-center">
+            <h1 class="">Screening for:</h1>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th scope="row">Cinema hall:</th>
+                    <td>{{ repertoire.cinema_hall }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Movie:</th>
+                    <td>{{ repertoire.movie }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date:</th>
+                    <td>{{ repertoire.screening_date|date:'Y.m.l' }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Time:</th>
+                    <td>{{ repertoire.screening_time|date:'H:i' }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Price:</th>
+                    <td>{{ repertoire.price }} &euro;</td>
+                </tr>
+                </tbody>
+            </table>
+        </header>
     </div>
 {% endblock %}
