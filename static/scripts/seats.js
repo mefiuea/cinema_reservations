@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('test-seats')
 
     function seats() {
         let id_status = this.id;
@@ -10,12 +9,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.id = 'selected'
             let id_status = this.id;
             console.log('id status after: ', id_status)
+        } else if (id_status === 'selected') {
+            this.classList.add('box-available')
+            this.classList.remove('box-selected')
+            this.id = 'available'
+            console.log('id status after: ', id_status)
         }
         // this.classList.add('box-unavailable')
     }
 
     $(document).ready(function () {
-        let seat_selected = $('.box-available, .box-unavailable');
+        let seat_selected = $('.box-available');
         seat_selected.click(seats);
     });
 });
