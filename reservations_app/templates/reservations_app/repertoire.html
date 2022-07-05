@@ -92,7 +92,7 @@
                                     {% endfor %}</p>
                                 <div class="">
                                     <form action="" method="GET" class="">
-                                        <a href="{% url 'reservations_app:booking_view' repertoire.id %}"
+                                        <a href="{% url 'reservations_app:booking_view' repertoire_id=repertoire.id cinema_hall_id=repertoire.cinema_hall.id %}"
                                            class="btn btn-outline-success form-control">Go to cinema hall</a>
                                     </form>
                                 </div>

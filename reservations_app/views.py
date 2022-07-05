@@ -91,14 +91,18 @@ def get_repertoire_by_selected_sorting(request):
     return render(request, 'reservations_app/repertoires_list_by_query_string.html', context=context)
 
 
-def booking_view(request, repertoire_id):
+def booking_view(request, repertoire_id, cinema_hall_id):
     if request.method == 'POST':
         pass
 
     if request.method == 'GET':
         repertoire_id = repertoire_id
+        cinema_hall_id = cinema_hall_id
+        repertoire = RepertoireModel.objects.get(pk=repertoire_id)
 
         context = {
-            'repertoire_id': repertoire_id
+            'repertoire_id': repertoire_id,
+            'cinema_hall_id': cinema_hall_id,
+            'repertoire': repertoire,
         }
         return render(request, 'reservations_app/booking.html', context=context)
