@@ -96,4 +96,9 @@ def booking_view(request, repertoire_id):
         pass
 
     if request.method == 'GET':
-        pass
+        repertoire_id = repertoire_id
+
+        context = {
+            'repertoire_id': repertoire_id
+        }
+        return render(request, 'reservations_app/booking.html', context=context)
