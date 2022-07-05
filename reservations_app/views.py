@@ -18,7 +18,7 @@ def repertoire_view(request):
         pass
 
     if request.method == 'GET':
-        movies_list = []
+        genres_list = []
         calendar_error = ''
         date_selected = request.GET.get('date')
         if date_selected is None or date_selected == '':
@@ -34,10 +34,19 @@ def repertoire_view(request):
         # for repertoire in repertoires:
         #     print('SCREENING TIME: ', repertoire.screening_time, type(repertoire.screening_time), flush=True)
 
+        # get genres of movies for specific repertoire
+        for repertoire in repertoires:
+            for genre in repertoire.movie.genre.all():
+                genres_list.append((genre.genre, genre.id))
+
+        # remove duplications from list
+        genres_list = list(dict.fromkeys(genres_list))
+
         context = {
             'date_selected': date_selected,
             'calendar_error': calendar_error,
             'repertoires': repertoires,
+            'genres': genres_list,
         }
         return render(request, 'reservations_app/repertoire.html', context=context)
 
@@ -45,11 +54,15 @@ def repertoire_view(request):
 def get_repertoire_by_selected_sorting(request):
     selected_sorting = request.GET.get('sorting_by')
     selected_date = request.GET.get('date')
+    selected_genre = request.GET.get('genre')
+    # validation for date
     if selected_date is None or selected_date == '':
         # view today's repertoire
         selected_date = date.today().strftime('%Y-%m-%d')
     print('SELECTED SORTING JAVA SCRIPT: ', selected_sorting, flush=True)
     print('SELECTED DATE JAVA SCRIPT: ', selected_date, flush=True)
+    print('SELECTED GENRE JAVA SCRIPT: ', selected_genre, flush=True)
+    # validation for sorting
     if selected_sorting == 'screening_time':
         order_by = 'screening_time'
     elif selected_sorting == 'alphabetically':
@@ -58,7 +71,17 @@ def get_repertoire_by_selected_sorting(request):
         order_by = 'movie__duration'
     else:
         order_by = 'screening_time'
-    repertoires = RepertoireModel.objects.filter(screening_date=selected_date).order_by(order_by)
+    # validation for genre
+    if selected_genre is None or selected_genre == 'None':
+        selected_genre = 'no_filter'
+
+    if selected_genre == 'no_filter':
+        # use genre filter
+        print('TUU!!!')
+        repertoires = RepertoireModel.objects.filter(screening_date=selected_date).order_by(order_by)
+    else:
+        repertoires = RepertoireModel.objects.filter(screening_date=selected_date,
+                                                     movie__genre=selected_genre).order_by(order_by)
     print('REPERTOIRES JAVA SCRIPT: ', repertoires, flush=True)
 
     context = {

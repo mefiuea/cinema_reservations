@@ -26,27 +26,44 @@
 
                 <div class="collapse mb-3 container-sm" id="filters">
                     <div class="card card-body align-items-center">
-                        <span>Sort by:</span>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sorting"
-                                   id="sorted_screening_time" value="screening_time" checked>
-                            <label class="form-check-label" for="sorted_screening_time">
-                                Screening time
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sorting"
-                                   id="sorted_alphabetically" value="alphabetically">
-                            <label class="form-check-label" for="sorted_alphabetically">
-                                Alphabetically
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sorting"
-                                   id="sorted_duration" value="duration">
-                            <label class="form-check-label" for="sorted_duration">
-                                Duration
-                            </label>
+                        <div class="row align-items-start">
+                            <div class="col" style="width: 150px">
+                                <span class="">Sort by:</span>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sorting"
+                                           id="sorted_screening_time" value="screening_time" checked>
+                                    <label class="form-check-label" for="sorted_screening_time">
+                                        Screening time
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sorting"
+                                           id="sorted_alphabetically" value="alphabetically">
+                                    <label class="form-check-label" for="sorted_alphabetically">
+                                        Alphabetically
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sorting"
+                                           id="sorted_duration" value="duration">
+                                    <label class="form-check-label" for="sorted_duration">
+                                        Duration
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col" style="width: 250px">
+                                <span class="">Filter by:</span>
+                                <div class="d-flex">
+                                    <label class="m-1" for="genre-names">Genre:</label>
+                                    <select class="form-select form-select-sm" name="genres" aria-label=".form-select-sm"
+                                            id="genre-names">
+                                        <option value="None">None</option>
+                                        {% for genre in genres %}
+                                            <option value="{{ genre.1 }}">{{ genre.0 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,6 +83,11 @@
                             {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
                             <p class="card-text">screening time: <span
                                     class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
+                            <p class="">Genres:
+                                {% for genre in repertoire.movie.genre.all %}
+                                    <span class="text-muted">{{ genre }}{% if forloop.last %}{% else %}
+                                        ,{% endif %}</span>
+                                {% endfor %}</p>
                         </div>
                     </div>
                     <div class="card-footer">

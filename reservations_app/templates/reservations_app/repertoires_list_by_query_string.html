@@ -13,6 +13,11 @@
                 {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
                 <p class="card-text">screening time: <span
                         class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
+                <p class="">Genres:
+                    {% for genre in repertoire.movie.genre.all %}
+                        <span class="text-muted">{{ genre }}{% if forloop.last %}{% else %}
+                            ,{% endif %}</span>
+                    {% endfor %}</p>
             </div>
         </div>
         <div class="card-footer">
