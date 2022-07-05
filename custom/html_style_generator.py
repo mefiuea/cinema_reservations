@@ -25,4 +25,4 @@ for idx, l in enumerate(letters_list):
         grid-column-end: {1+i};
         grid-row-start: {idx+1};
         grid-row-end: {idx+2};
-    |''')
+    *''')
