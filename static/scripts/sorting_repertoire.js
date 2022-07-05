@@ -20,6 +20,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }).then(function (data) {
             return document.getElementById('repertoires').innerHTML = data;
         })
+
+        // update date
+        let actual_date = document.getElementById('actual-date').innerText = date_from_calendar
+        console.log(actual_date)
     }
 
     $(document).ready(function () {
