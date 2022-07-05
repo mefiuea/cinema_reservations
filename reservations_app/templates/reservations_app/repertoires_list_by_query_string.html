@@ -1,34 +1,40 @@
 {% load static %}
 
-{% for repertoire in repertoires %}
-    <div class="card mb-5">
-        <div class="card-horizontal">
-            <div class="float-start">
-                <img class="card-img" src="{% static 'images/movie_icon.svg' %}"
-                     style="height: 10rem; object-fit: scale-down" alt="Movie icon">
-            </div>
-            <div class="card-body">
-                <h4 class="card-title">{{ repertoire.movie.title }}</h4>
-                <p class="card-text">Description: {{ repertoire.movie.description }}</p>
-                {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
-                <p class="card-text">screening time: <span
-                        class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
-                <p class="">Genres:
-                    {% for genre in repertoire.movie.genre.all %}
-                        <span class="text-muted">{{ genre }}{% if forloop.last %}{% else %}
-                            ,{% endif %}</span>
-                    {% endfor %}</p>
-                <div class="">
-                    <form action="" method="GET" class="">
-                        <a href="{% url 'reservations_app:booking_view' repertoire.id %}"
-                           class="btn btn-outline-success form-control">Go to cinema hall</a>
-                    </form>
+{% if repertoires.count > 0 %}
+    {% for repertoire in repertoires %}
+        <div class="card mb-5">
+            <div class="card-horizontal">
+                <div class="float-start">
+                    <img class="card-img" src="{% static 'images/movie_icon.svg' %}"
+                         style="height: 10rem; object-fit: scale-down" alt="Movie icon">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ repertoire.movie.title }}</h4>
+                    <p class="card-text">Description: {{ repertoire.movie.description }}</p>
+                    {#                        <p class="card-text">screening time: {{ movie.screening_time }}</p>#}
+                    <p class="card-text">screening time: <span
+                            class="screening-time">{{ repertoire.screening_time|date:'H:i' }}</span></p>
+                    <p class="">Genres:
+                        {% for genre in repertoire.movie.genre.all %}
+                            <span class="text-muted">{{ genre }}{% if forloop.last %}{% else %}
+                                ,{% endif %}</span>
+                        {% endfor %}</p>
+                    <div class="">
+                        <form action="" method="GET" class="">
+                            <a href="{% url 'reservations_app:booking_view' repertoire.id %}"
+                               class="btn btn-outline-success form-control">Go to cinema hall</a>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <div class="card-footer">
+                <small class="text-muted">Duration: {{ repertoire.movie.duration }}</small>
+                <small class="text-muted">Price: {{ repertoire.price }} &euro;</small>
+            </div>
         </div>
-        <div class="card-footer">
-            <small class="text-muted">Duration: {{ repertoire.movie.duration }}</small>
-            <small class="text-muted">Price: {{ repertoire.price }} &euro;</small>
-        </div>
+    {% endfor %}
+{% else %}
+    <div class="alert alert-light" role="alert">
+        <h4 class="text-center">No repertoire available for this day</h4>
     </div>
-{% endfor %}
+{% endif %}
