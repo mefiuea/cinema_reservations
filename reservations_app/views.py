@@ -104,3 +104,11 @@ def booking_view(request, repertoire_id):
             'repertoire': repertoire,
         }
         return render(request, 'reservations_app/booking.html', context=context)
+
+
+def booking_completed_view(request, repertoire_id):
+    if request.method == 'POST':
+        return render(request, 'reservations_app/booking_success.html')
+
+    if request.method == 'GET':
+        return redirect(reverse_lazy('reservations_app:repertoire_view'))

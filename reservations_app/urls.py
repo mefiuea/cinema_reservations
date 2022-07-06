@@ -10,4 +10,6 @@ urlpatterns = [
     path('repertoire/get_repertoire_by_selected_sorting/', views.get_repertoire_by_selected_sorting,
          name='get_repertoire_by_selected_sorting_view'),
     path('repertoire/booking/<int:repertoire_id>/', views.booking_view, name='booking_view'),
+    path('repertoire/booking-completed/<int:repertoire_id>/', views.booking_completed_view,
+         name='booking_completed_view'),
 ]
