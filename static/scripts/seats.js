@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // get list of all available seats
     let available_seats_list = Array.from(document.getElementsByClassName('box-available'));
 
-    // get list of booked seats from server
+    // get list of booked seats from server and compare with all available seats
     let booked_seats_list = Array.from(document.getElementsByClassName('booked-seats'));
     booked_seats_list.forEach(function (booked_seat) {
         available_seats_list.forEach(function (available_seat) {

@@ -12,7 +12,7 @@
             <hr>
             <p class="mb-0">Details:</p>
             <p>{{ repertoire.movie.title }},</p>
-            <p>{{ repertoire.screening_date|date:'Y.m.l' }},</p>
+            <p>{{ repertoire.screening_date|date:'Y.m.d' }},</p>
             <p>{{ repertoire.screening_time|date:'H:i' }},</p>
             <p>Tickets: {{ seats_count }}x -
                 {% for seat in seats %}{{ seat }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %},</p>

@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import RepertoireModel, ReservationModel, SeatModel
+from custom.get_booked_seats import get_booked_seats
 
 
 def home_view(request):
@@ -78,7 +79,6 @@ def get_repertoire_by_selected_sorting(request):
 
     if selected_genre == 'no_filter':
         # use genre filter
-        print('TUU!!!')
         repertoires = RepertoireModel.objects.filter(screening_date=selected_date).order_by(order_by)
     else:
         repertoires = RepertoireModel.objects.filter(screening_date=selected_date,
@@ -102,12 +102,9 @@ def booking_view(request, repertoire_id):
 
         # get all reservations for this specific screening
         reservations = ReservationModel.objects.filter(repertoire=repertoire)
+
         # get all booked seats to list
-        booked_seats_list = []
-        for reservation in reservations:
-            print('RESERVATION: ', reservation.booked_seats.all(), flush=True)
-            for seat in reservation.booked_seats.all():
-                booked_seats_list.append(seat.position)
+        booked_seats_list = get_booked_seats(reservation_instance=reservations)
 
         context = {
             'repertoire_id': repertoire_id,
@@ -124,11 +121,22 @@ def booking_completed_view(request, repertoire_id):
         random_int = randrange(1, 999999)
         print('SEATS LIST: ', seats_list, buyer, flush=True)
 
+        # get repertoire instance for this specific screening
         repertoire = RepertoireModel.objects.get(pk=repertoire_id)
 
-        # create reservation for this specific order and save it to database
-        reservation = ReservationModel(buyer=buyer, repertoire=repertoire,
-                                       reservation_number=f'{buyer.id}-{repertoire.id}-{random_int}')
+        # get all reservations for this specific screening
+        reservations = ReservationModel.objects.filter(repertoire=repertoire)
+
+        # get all booked seats
+        booked_seats_list = get_booked_seats(reservation_instance=reservations)
+        # checking if the places to be booked are not already booked - validation
+        try:
+            for seat_to_be_booked in seats_list:
+                if seat_to_be_booked in booked_seats_list:
+                    raise ValidationError('This seat is already booked - it is in database!')
+        except ValidationError as err:
+            print('ERROR: ', repr(err), flush=True)
+            return render(request, 'reservations_app/booking_failure.html')
 
         # Check for duplicate seats in the list - validation
         try:
@@ -137,6 +145,10 @@ def booking_completed_view(request, repertoire_id):
         except ValidationError as err:
             print('ERROR: ', repr(err), flush=True)
             return render(request, 'reservations_app/booking_failure.html')
+
+        # create reservation for this specific order (is not yet saved to database)
+        reservation = ReservationModel(buyer=buyer, repertoire=repertoire,
+                                       reservation_number=f'{buyer.id}-{repertoire.id}-{random_int}')
 
         # get instances of seats from database and check if this seats exists in database - validation
         # if everything is ok (no errors) save reservation to database
