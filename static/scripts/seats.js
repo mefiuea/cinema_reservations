@@ -1,5 +1,21 @@
 window.addEventListener('DOMContentLoaded', (event) => {
 
+    // get list of all available seats
+    let available_seats_list = Array.from(document.getElementsByClassName('box-available'));
+
+    // get list of booked seats from server
+    let booked_seats_list = Array.from(document.getElementsByClassName('booked-seats'));
+    booked_seats_list.forEach(function (booked_seat) {
+        available_seats_list.forEach(function (available_seat) {
+            if (available_seat.innerText === booked_seat.innerText) {
+                console.log('MATCH!!!', available_seat.innerText, booked_seat.innerText)
+                available_seat.classList.add('box-unavailable');
+                available_seat.classList.remove('box-available');
+                available_seat.id = 'unavailable';
+            }
+        })
+    })
+
     function seats() {
         let id_status = this.id;
         // console.log('id status before: ', id_status)
@@ -19,7 +35,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         // check if some places are picked
         let picked = document.getElementsByClassName('box-selected');
         let book_ticket_button = document.getElementById('book-ticket');
-        if (picked.length > 0 && picked.length < 7 ) {
+        if (picked.length > 0 && picked.length < 7) {
             // seats are selected - enable button
             book_ticket_button.disabled = false;
         } else {
