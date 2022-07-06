@@ -1,12 +1,13 @@
-import operator
 from datetime import date
+from random import randrange
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 
-from .models import RepertoireModel
+from .models import RepertoireModel, ReservationModel, SeatModel
 
 
 def home_view(request):
@@ -110,9 +111,38 @@ def booking_completed_view(request, repertoire_id):
     if request.method == 'POST':
         buyer = request.user
         seats_list = request.POST.getlist('selected_seats')
+        random_int = randrange(1, 999999)
         print('SEATS LIST: ', seats_list, buyer, flush=True)
 
         repertoire = RepertoireModel.objects.get(pk=repertoire_id)
+
+        # create reservation for this specific order and save it to database
+        reservation = ReservationModel(buyer=buyer, repertoire=repertoire,
+                                       reservation_number=f'{buyer.id}-{repertoire.id}-{random_int}')
+
+        # Check for duplicate seats in the list - validation
+        try:
+            if len(seats_list) != len(dict.fromkeys(seats_list)):
+                raise ValidationError('Duplication of selected seats!')
+        except ValidationError as err:
+            print('ERROR: ', repr(err), flush=True)
+            return render(request, 'reservations_app/booking_failure.html')
+
+        # get instances of seats from database and check if this seats exists in database - validation
+        # if everything is ok (no errors) save reservation to database
+        seat_instance_from_db_list = []
+        try:
+            for seat in seats_list:
+                seat_instance_from_db = SeatModel.objects.get(position__exact=seat)
+                seat_instance_from_db_list.append(seat_instance_from_db)
+        except ObjectDoesNotExist as err:
+            print('ERROR: ', repr(err), flush=True)
+            return render(request, 'reservations_app/booking_failure.html')
+        reservation.save()
+        for seat_instance in seat_instance_from_db_list:
+            reservation.booked_seats.add(seat_instance)
+
+        print('SEATS LIST INSTANCES FROM DB: ', seat_instance_from_db_list, flush=True)
 
         context = {
             'repertoire': repertoire,

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Booking failure{% endblock %}
+
+{% block content %}
+    <div class="container-lg">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Problem with seat reservations - can't make reservations!</h4>
+        </div>
+    </div>
+    <a href="http://0.0.0.0:8000/repertoire/booking/8/" class="btn btn-danger">powrót</a>
+{% endblock %}
