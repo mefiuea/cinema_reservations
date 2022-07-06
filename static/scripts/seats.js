@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         // check if some places are picked
         let picked = document.getElementsByClassName('box-selected');
         let book_ticket_button = document.getElementById('book-ticket');
-        if (picked.length > 0) {
+        if (picked.length > 0 && picked.length < 7 ) {
             // seats are selected - enable button
             book_ticket_button.disabled = false;
         } else {
