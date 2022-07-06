@@ -4,16 +4,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let id_status = this.id;
         // console.log('id status before: ', id_status)
         if (id_status === 'available') {
-            this.classList.add('box-selected')
-            this.classList.remove('box-available')
-            this.id = 'selected'
+            this.classList.add('box-selected');
+            this.classList.remove('box-available');
+            this.id = 'selected';
             let id_status = this.id;
             // console.log('id status after: ', id_status)
         } else if (id_status === 'selected') {
-            this.classList.add('box-available')
-            this.classList.remove('box-selected')
-            this.id = 'available'
+            this.classList.add('box-available');
+            this.classList.remove('box-selected');
+            this.id = 'available';
             // console.log('id status after: ', id_status)
+        }
+
+        // check if some places are picked
+        let picked = document.getElementsByClassName('box-selected');
+        let book_ticket_button = document.getElementById('book-ticket');
+        if (picked.length > 0) {
+            // seats are selected - enable button
+            book_ticket_button.disabled = false;
+        } else {
+            // no seats selected - disable button
+            book_ticket_button.disabled = true;
         }
 
     }
