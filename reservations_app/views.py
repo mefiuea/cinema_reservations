@@ -100,9 +100,19 @@ def booking_view(request, repertoire_id):
         repertoire_id = repertoire_id
         repertoire = RepertoireModel.objects.get(pk=repertoire_id)
 
+        # get all reservations for this specific screening
+        reservations = ReservationModel.objects.filter(repertoire=repertoire)
+        # get all booked seats to list
+        booked_seats_list = []
+        for reservation in reservations:
+            print('RESERVATION: ', reservation.booked_seats.all(), flush=True)
+            for seat in reservation.booked_seats.all():
+                booked_seats_list.append(seat.position)
+
         context = {
             'repertoire_id': repertoire_id,
             'repertoire': repertoire,
+            'booked_seats': booked_seats_list,
         }
         return render(request, 'reservations_app/booking.html', context=context)
 
