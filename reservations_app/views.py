@@ -108,7 +108,19 @@ def booking_view(request, repertoire_id):
 
 def booking_completed_view(request, repertoire_id):
     if request.method == 'POST':
-        return render(request, 'reservations_app/booking_success.html')
+        buyer = request.user
+        seats_list = request.POST.getlist('selected_seats')
+        print('SEATS LIST: ', seats_list, buyer, flush=True)
+
+        repertoire = RepertoireModel.objects.get(pk=repertoire_id)
+
+        context = {
+            'repertoire': repertoire,
+            'seats_count': len(seats_list),
+            'seats': seats_list,
+            'buyer': buyer,
+        }
+        return render(request, 'reservations_app/booking_success.html', context=context)
 
     if request.method == 'GET':
         return redirect(reverse_lazy('reservations_app:repertoire_view'))

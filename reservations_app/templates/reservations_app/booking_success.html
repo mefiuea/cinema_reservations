@@ -6,6 +6,19 @@
 
 {% block content %}
     <div class="container-lg">
-    <p>Test</p>
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Congratulations!</h4>
+            <p>You bought movie tickets.</p>
+            <hr>
+            <p class="mb-0">Details:</p>
+            <p>{{ repertoire.movie.title }},</p>
+            <p>{{ repertoire.screening_date|date:'Y.m.l' }},</p>
+            <p>{{ repertoire.screening_time|date:'H:i' }},</p>
+            <p>Tickets: {{ seats_count }}x -
+                {% for seat in seats %}{{ seat }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %},</p>
+            <p>{{ repertoire.price }} &euro;,</p>
+            <p>{{ repertoire.cinema_hall }},</p>
+            <p>Buyer: {{ buyer }}.</p>
+        </div>
     </div>
 {% endblock %}
