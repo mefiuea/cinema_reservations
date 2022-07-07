@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator, MaxLengthValidator
 
+from custom.picture_size import picture_size
+
 
 class AuthorModel(models.Model):
     first_name = models.CharField(max_length=50, null=False, blank=False)
@@ -27,6 +29,7 @@ class MovieModel(models.Model):
                                            validators=[MinValueValidator(0), MaxValueValidator(99)])
     description = models.TextField(blank=True, null=True, validators=[MaxLengthValidator(2000)])
     genre = models.ManyToManyField('MovieGenresModel', related_name='movie_genre')
+    movie_picture = models.ImageField(upload_to='movies_images/', blank=True, null=True, validators=[picture_size])
 
     def __str__(self):
         return self.title
