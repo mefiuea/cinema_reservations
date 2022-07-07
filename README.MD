@@ -155,4 +155,3 @@ Additionally, you can:
 1. Turn on debug mode in settings.py: DEBUG = True,
 2. If you don't have a cloudinary account, check the settings.py file and find: 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage' and comment it out.
-3. 
