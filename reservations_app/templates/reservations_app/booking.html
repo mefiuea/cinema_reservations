@@ -39,9 +39,9 @@
             <span class="booked-seats">{{ seat }}</span>
         {% endfor %}
     </div>
-    <div class="container-lg">
+    <div class="container-sm">
         <div class="d-flex justify-content-center mb-5">
-            <table class="table table-striped" style="width: 800px; height: 10px">
+            <table class="table table-striped" style="width: 800px; height: 10px;">
                 <tbody>
                 <tr class="text-center">
                     <td class="m-0 p-0" style="font-size: 10px">Screen</td>
@@ -53,7 +53,7 @@
               id="book-ticket-form">
             {% csrf_token %}
             <div class="d-flex justify-content-center">
-                <div class="wrapper mb-5">
+                <div class="wrapper mb-5" style="overflow: scroll">
                     <div class="box-description pa1">A</div>
                     <div class="box-available pa2" id="available">A1</div>
                     <div class="box-available pa3" id="available">A2</div>
@@ -218,7 +218,8 @@
             </div>
             {% if dif_date >= 0 %}
                 {% if user.is_authenticated %}
-                    <button type="button" class="btn btn-success form-control" id="book-ticket" disabled>Book ticket!
+                    <button type="button" class="btn btn-success form-control" id="book-ticket" disabled>Book
+                        ticket!
                     </button>
                 {% else %}
                     <div class="btn btn-info form-control">Log in to your account to book a ticket.</div>
