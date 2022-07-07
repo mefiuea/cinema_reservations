@@ -24,6 +24,11 @@ Ticket can only be booked after logging in. Test user accounts:
 1. Email: test1@test1.com; Password: qwertyui123
 2. Email: test2@test2.com; Password: qwertyui123
 
+the repertoire is available for the following days (status as of 2022-07-07):
+1. 2022-07-07
+2. 2022-07-08
+3. 2022-08-12
+
 ### Running project locally (without using a docker)
 #### I strongly recommend using a docker because in this case you don't need to have a database (PostgreSQL) locally and it is generally much simpler. See instructions below.
 Go in terminal to the place where you want to clone the repository.
