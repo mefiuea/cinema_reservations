@@ -34,7 +34,7 @@
             </table>
         </header>
     </div>
-    <div class="text-center" style="">Booked:
+    <div class="text-center" style="display: none">Booked:
         {% for seat in booked_seats %}
             <span class="booked-seats">{{ seat }}</span>
         {% endfor %}
@@ -217,7 +217,12 @@
                 </div>
             </div>
             {% if dif_date >= 0 %}
-            <button type="button" class="btn btn-success form-control" id="book-ticket" disabled>Book ticket!</button>
+                {% if user.is_authenticated %}
+                    <button type="button" class="btn btn-success form-control" id="book-ticket" disabled>Book ticket!
+                    </button>
+                {% else %}
+                    <div class="btn btn-info form-control">Log in to your account to book a ticket.</div>
+                {% endif %}
             {% else %}
                 <div class="btn btn-info form-control">It is not possible to book tickets with an older date.</div>
             {% endif %}

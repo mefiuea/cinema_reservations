@@ -1,7 +1,6 @@
 from datetime import date
 from random import randrange
 
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.core.exceptions import ValidationError
