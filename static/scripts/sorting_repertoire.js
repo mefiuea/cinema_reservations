@@ -1,27 +1,31 @@
+/*
+Function used for repertoire view (get_repertoire_by_selected_sorting).
+It is responsible for passing all user filtering and sorting data to the view.
+ */
+
 window.addEventListener('DOMContentLoaded', (event) => {
-    // console.log('test');
 
     function sorting_filtering() {
+        // selecting only radio button that was selected during filtering
         let marked_radio_button = document.querySelector('input[name="sorting"]:checked').value;
+        // get actually date
         let date_from_calendar = document.querySelector('input[name="date"]').value;
-        let params_list = [marked_radio_button, date_from_calendar]
-        console.log(marked_radio_button)
-        console.log(date_from_calendar)
-        console.log(params_list)
+        // get selected genre
         let genres = document.getElementById("genre-names");
         let genre = genres.options[genres.selectedIndex].value;
-        console.log(genre)
+        // create query string
         let params = new URLSearchParams();
         params.append("sorting_by", marked_radio_button)
         params.append("date", date_from_calendar)
         params.append("genre", genre)
-        console.log(params)
+        // indication of url path to which the request is to be sent
         let address = 'get_repertoire_by_selected_sorting/?' + params.toString();
-        console.log(address)
-
+        // View call (get_repertoire_by_selected_sorting) with parameters. Waiting for a response.
+        // Collecting the response from the view in html and replacing this data on the main page with views.
         let vf = fetch(address).then(function (response) {
             return response.text();
         }).then(function (data) {
+            // get list of repertoires and replacement of data from the received response
             return document.getElementById('repertoires').innerHTML = data;
         })
 
@@ -31,8 +35,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     $(document).ready(function () {
+        // select radio button in sorting option
         let radio_checked = $('.form-check-input');
         radio_checked.click(sorting_filtering);
+        // select drop-down menu in filtering option
         let genre_selected_menu = $('#genre-names');
         genre_selected_menu.change(sorting_filtering);
     });
