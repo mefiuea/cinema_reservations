@@ -28,7 +28,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'my-cinema-reservations.herokuapp.com',
+                 'https://my-cinema-reservations.herokuapp.com']
+INTERNAL_IPS = ALLOWED_HOSTS
 
 # Application definition
 
