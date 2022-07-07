@@ -30,12 +30,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         console.log(actual_date)
     }
 
-    function genres() {
-        let genres = document.getElementById("genre-names");
-        let genre = genres.options[genres.selectedIndex].value;
-        console.log(genre)
-    }
-
     $(document).ready(function () {
         let radio_checked = $('.form-check-input');
         radio_checked.click(sorting_filtering);
