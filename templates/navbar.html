@@ -10,7 +10,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mt-1">
                 <a class="nav-link" href="{% url 'reservations_app:repertoire_view' %}">repertoire</a>
+                {% if user.is_authenticated and user.is_superuser %}
                 <a class="nav-link" href="{% url 'admin:index' %}">admin panel</a>
+                {% endif %}
             </div>
         </div>
         <form class="form-inline my-2 my-lg-0">

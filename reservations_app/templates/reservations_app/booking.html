@@ -216,8 +216,11 @@
                     <div class="box-description pj16">J</div>
                 </div>
             </div>
-            <button type="button" class="btn btn-success form-control" id="book-ticket" disabled>Book ticket!
-            </button>
+            {% if dif_date >= 0 %}
+            <button type="button" class="btn btn-success form-control" id="book-ticket" disabled>Book ticket!</button>
+            {% else %}
+                <div class="btn btn-info form-control">It is not possible to book tickets with an older date.</div>
+            {% endif %}
         </form>
     </div>
 {% endblock %}

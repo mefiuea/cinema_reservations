@@ -106,10 +106,18 @@ def booking_view(request, repertoire_id):
         # get all booked seats to list
         booked_seats_list = get_booked_seats(reservation_instance=reservations)
 
+        # get actual date
+        actual_date = date.today()
+        # get screening date
+        screening_date = repertoire.screening_date
+        # calculation of the difference of days until screening
+        dif_date = (screening_date - actual_date).days
+
         context = {
             'repertoire_id': repertoire_id,
             'repertoire': repertoire,
             'booked_seats': booked_seats_list,
+            'dif_date': dif_date,
         }
         return render(request, 'reservations_app/booking.html', context=context)
 

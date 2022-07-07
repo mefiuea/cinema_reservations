@@ -4,5 +4,5 @@ def get_booked_seats(reservation_instance):
         for seat in reservation.booked_seats.all():
             booked_seats_list.append(seat.position)
 
-    print('BOOKED SEATS LIST: ', booked_seats_list, flush=True)
+    # print('BOOKED SEATS LIST: ', booked_seats_list, flush=True)
     return booked_seats_list

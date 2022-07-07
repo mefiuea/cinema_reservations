@@ -10,5 +10,5 @@
             <h4 class="alert-heading">Problem with seat reservations - can't make reservations!</h4>
         </div>
     </div>
-    <a href="http://0.0.0.0:8000/repertoire/booking/8/" class="btn btn-danger">powrót</a>
+    <a href="{% url 'reservations_app:repertoire_view' %}" class="btn btn-danger">Go back to repertoire</a>
 {% endblock %}

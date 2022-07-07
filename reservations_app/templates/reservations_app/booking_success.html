@@ -20,6 +20,6 @@
             <p>{{ repertoire.cinema_hall }},</p>
             <p>Buyer: {{ buyer }}.</p>
         </div>
+        <a href="{% url 'reservations_app:repertoire_view' %}" class="btn btn-danger">Go back to repertoire</a>
     </div>
-    <a href="http://0.0.0.0:8000/repertoire/booking/8/" class="btn btn-danger">powrót</a>
 {% endblock %}
