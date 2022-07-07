@@ -76,8 +76,14 @@
                     <div class="card mb-5">
                         <div class="card-horizontal">
                             <div class="float-start">
-                                <img class="card-img" src="{% static 'images/movie_icon.svg' %}"
-                                     style="height: 10rem; object-fit: scale-down" alt="Movie icon">
+                                <div class="m-3">
+                                    <img class="card-img rounded-3" style="height: 10rem; object-fit: scale-down"
+                                            {% if repertoire.movie.movie_picture %}
+                                         src="{{ repertoire.movie.movie_picture.url }}" alt="Movie icon">
+                                            {% else %}
+                                                src="{% static 'images/movie_icon.svg' %}" alt="Default movie icon">
+                                            {% endif %}
+                                </div>
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title">{{ repertoire.movie.title }}</h4>
